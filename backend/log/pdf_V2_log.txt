@@ -1,0 +1,58 @@
+2025-01-24 09:12:36,172 - INFO - 
+Starting new check at 2025-01-24 09:12:36
+2025-01-24 09:12:36,793 - INFO - No duplicates found.
+2025-01-24 09:12:36,797 - INFO - No duplicates found to remove.
+2025-01-24 09:12:36,870 - INFO - Waiting 10 seconds until next check...
+2025-01-24 09:12:46,871 - INFO - 
+Starting new check at 2025-01-24 09:12:46
+2025-01-24 09:12:47,573 - INFO - No duplicates found.
+2025-01-24 09:12:47,576 - INFO - No duplicates found to remove.
+2025-01-24 09:12:47,656 - INFO - Waiting 10 seconds until next check...
+2025-01-24 09:12:57,656 - INFO - 
+Starting new check at 2025-01-24 09:12:57
+2025-01-24 09:12:58,278 - INFO - No duplicates found.
+2025-01-24 09:12:58,283 - INFO - No duplicates found to remove.
+2025-01-24 09:12:58,358 - INFO - Waiting 10 seconds until next check...
+2025-01-24 09:13:08,359 - INFO - 
+Starting new check at 2025-01-24 09:13:08
+2025-01-24 09:13:08,956 - INFO - No duplicates found.
+2025-01-24 09:13:08,959 - INFO - No duplicates found to remove.
+2025-01-24 09:13:09,034 - INFO - Waiting 10 seconds until next check...
+2025-01-24 09:13:41,559 - INFO - 
+Starting new check at 2025-01-24 09:13:41
+2025-01-24 09:13:42,176 - INFO - No duplicates found.
+2025-01-24 09:13:42,180 - INFO - No duplicates found to remove.
+2025-01-24 09:13:42,253 - INFO - Waiting 3600 seconds until next check...
+2025-01-24 09:54:37,816 - INFO - 
+Starting new check at 2025-01-24 09:54:37
+2025-01-24 09:54:38,683 - INFO - No duplicates found.
+2025-01-24 09:54:38,687 - INFO - No duplicates found to remove.
+2025-01-24 09:54:38,761 - INFO - Waiting 3600 seconds until next check...
+2025-01-24 09:57:08,802 - INFO - 
+Starting new check at 2025-01-24 09:57:08
+2025-01-24 09:57:09,918 - INFO - PDF uspešno generiran: /home/database/KSSB_V2/dokumenti/potrdila_clanstvo/domen_testira_potrdilo_o_clanstvu.pdf
+2025-01-24 09:57:09,918 - INFO - Generated PDF certificate: /home/database/KSSB_V2/dokumenti/potrdila_clanstvo/domen_testira_potrdilo_o_clanstvu.pdf
+2025-01-24 09:57:09,920 - INFO - Saved pristopna izjava: /home/database/KSSB_V2/dokumenti/pristopna_izjava/pristopna_izjava_domen_testira.pdf
+2025-01-24 09:57:09,921 - INFO - Saved potrdilo solanje: /home/database/KSSB_V2/dokumenti/potrdila_vpis/domen_testira_potrdilo_solanje.pdf
+2025-01-24 09:57:09,938 - INFO - No duplicates found.
+2025-01-24 09:57:09,941 - INFO - No duplicates found to remove.
+2025-01-24 09:57:10,204 - INFO - Waiting 3600 seconds until next check...
+2025-01-24 10:02:15,646 - INFO - 
+Starting new check at 2025-01-24 10:02:15
+2025-01-24 10:02:16,317 - INFO - No duplicates found.
+2025-01-24 10:02:16,320 - INFO - No duplicates found to remove.
+2025-01-24 10:02:16,406 - INFO - Waiting 3600 seconds until next check...
+2025-01-24 10:04:22,487 - INFO - 
+Starting new check at 2025-01-24 10:04:22
+2025-01-24 10:04:23,706 - INFO - PDF uspešno generiran: /home/database/KSSB_V2/dokumenti/potrdila_clanstvo/domen_testira_potrdilo_o_clanstvu.pdf
+2025-01-24 10:04:23,706 - INFO - Generated PDF certificate: /home/database/KSSB_V2/dokumenti/potrdila_clanstvo/domen_testira_potrdilo_o_clanstvu.pdf
+2025-01-24 10:04:23,707 - INFO - Saved pristopna izjava: /home/database/KSSB_V2/dokumenti/pristopna_izjava/pristopna_izjava_domen_testira.pdf
+2025-01-24 10:04:23,707 - INFO - Saved potrdilo solanje: /home/database/KSSB_V2/dokumenti/potrdila_vpis/domen_testira_potrdilo_solanje.pdf
+2025-01-24 10:04:23,720 - INFO - No duplicates found.
+2025-01-24 10:04:23,723 - INFO - No duplicates found to remove.
+2025-01-24 10:04:23,989 - INFO - Waiting 3600 seconds until next check...
+2025-01-24 11:04:23,996 - INFO - 
+Starting new check at 2025-01-24 11:04:23
+2025-01-24 11:04:24,744 - INFO - No duplicates found.
+2025-01-24 11:04:24,755 - INFO - No duplicates found to remove.
+2025-01-24 11:04:24,864 - INFO - Waiting 3600 seconds until next check...

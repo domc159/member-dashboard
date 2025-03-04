@@ -1,0 +1,93 @@
+.container {
+    padding: 20px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--background);
+    color: var(--foreground);
+}
+
+.headerContainer {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+.chartsContainer {
+    display: flex;
+    flex-direction: column;
+    height: calc(100% - 60px);
+}
+
+.topChartsGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    height: 50%;
+}
+
+.bottomChartsGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    height: 50%;
+    margin-top: 20px;
+}
+
+.chartBox {
+    padding: 15px;
+    background-color: var(--background);
+    border: 1px solid #414344;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+}
+
+.chartTitle {
+    color: var(--foreground);
+    margin-bottom: 15px;
+    font-size: 18px;
+    text-align: center;
+}
+
+.chartContainer {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 0;
+}
+
+.pieChartContainer {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    max-height: 50vh;
+    margin: auto;
+}
+
+.pieChartContainer > canvas {
+    max-height: 100% !important;
+    width: auto !important;
+}
+
+.loadingContainer {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    color: var(--foreground);
+}
+
+.bottomChart {
+    height: 50%;
+    margin-top: 20px;
+    padding: 15px;
+    background-color: var(--background);
+    border: 1px solid #414344;
+    border-radius: 8px;
+} 

@@ -1,0 +1,208 @@
+import poplib
+import email
+from bs4 import BeautifulSoup
+import sqlite3
+from email.header import decode_header
+import os
+from datetime import datetime
+
+class EmailProcessor:
+    def __init__(self, email_user, email_pass, pop_server="pop.gmail.com"):
+        self.email_user = email_user
+        self.email_pass = email_pass
+        self.pop_server = pop_server
+        self.conn = None  # Inicializacija conn atributa
+        self.setup_database()
+    
+    def setup_database(self):
+        try:
+            self.conn = sqlite3.connect('clani.db')
+            self.cursor = self.conn.cursor()
+            
+            # Ustvarimo tabelo če še ne obstaja
+            self.cursor.execute('''
+            CREATE TABLE IF NOT EXISTS clani (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                ime TEXT,
+                priimek TEXT,
+                datum_rojstva TEXT,
+                email TEXT,
+                telefon TEXT,
+                naslov TEXT,
+                posta TEXT,
+                postna_stevilka TEXT,
+                fakulteta TEXT,
+                studijski_program TEXT,
+                letnik TEXT,
+                datum_vclanitve TEXT,
+                status TEXT,
+                potrdilo_url TEXT,
+                processed_date TIMESTAMP
+            )
+            ''')
+            self.conn.commit()
+        except sqlite3.Error as e:
+            print(f"Napaka pri vzpostavljanju povezave z bazo: {str(e)}")
+            raise
+    
+    def connect_to_email(self):
+        try:
+            # Povezava na POP3 strežnik z SSL
+            self.pop = poplib.POP3_SSL(self.pop_server)
+            print(f"Povezovanje na strežnik: {self.pop_server}")
+            
+            # Prijava
+            print(f"Prijavljanje uporabnika: {self.email_user}")
+            self.pop.user(self.email_user)
+            self.pop.pass_(self.email_pass)
+            
+            # Izpis informacij o nabiralniku
+            print(f"Povezava uspešna. Število sporočil: {len(self.pop.list()[1])}")
+        except poplib.error_proto as e:
+            print(f"Napaka pri povezavi na email strežnik: {str(e)}")
+            raise
+        except Exception as e:
+            print(f"Nepričakovana napaka: {str(e)}")
+            raise
+    
+    def safe_find(self, soup, label):
+        element = soup.find(string=lambda text: text and label in text)
+        if element:
+            next_element = element.find_next('b') or element.find_next('a')
+            return next_element.text.strip() if next_element else None
+        return None
+    
+    def extract_data_from_html(self, html_content):
+        soup = BeautifulSoup(html_content, 'html.parser')
+        
+        potrdilo_element = soup.find(string=lambda text: text and "SKENIRANO POTRDILO:" in text)
+        potrdilo_url = potrdilo_element.find_next('a')['href'] if potrdilo_element else None
+        
+        return {
+            'ime': self.safe_find(soup, "IME:"),
+            'priimek': self.safe_find(soup, "PRIIMEK:"),
+            'datum_rojstva': self.safe_find(soup, "DATUM ROJSTVA:"),
+            'email': self.safe_find(soup, "E-POŠTA:"),
+            'telefon': self.safe_find(soup, "TELEFONSKA ŠTEVILKA:"),
+            'naslov': self.safe_find(soup, "NASLOV STALNEGA PREBIVALIŠČA:"),
+            'posta': self.safe_find(soup, "POŠTA:"),
+            'postna_stevilka': self.safe_find(soup, "POŠTNA ŠTEVILKA:"),
+            'fakulteta': self.safe_find(soup, "NAZIV FAKULTET/ŠOLE:"),
+            'studijski_program': self.safe_find(soup, "IME ŠTUDIJSKEGA PROGRAMA:"),
+            'letnik': self.safe_find(soup, "LETNIK ŠTUDIJA:"),
+            'datum_vclanitve': self.safe_find(soup, "DANAŠNJI DATUM:"),
+            'status': self.safe_find(soup, "STATUS:"),
+            'potrdilo_url': potrdilo_url,
+            'processed_date': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        }
+    
+    def save_to_database(self, data):
+        print("Saving to database:")
+        print(f"Name: {data['ime']}")
+        print(f"Surname: {data['priimek']}")
+        print(f"Birth Date: {data['datum_rojstva']}")
+        print(f"Email: {data['email']}")
+        print(f"Phone: {data['telefon']}")
+        print(f"Address: {data['naslov']}")
+        print(f"City: {data['posta']}")
+        print(f"Postal Code: {data['postna_stevilka']}")
+        print(f"Faculty: {data['fakulteta']}")
+        print(f"Study Program: {data['studijski_program']}")
+        print(f"Year: {data['letnik']}")
+        print(f"Join Date: {data['datum_vclanitve']}")
+        print(f"Status: {data['status']}")
+        print(f"Certificate URL: {data['potrdilo_url']}")
+        print(f"Processing Date: {data['processed_date']}")
+        print("-" * 50)
+
+        """
+        # Preveri če član že obstaja
+        self.cursor.execute('''
+        SELECT id FROM clani 
+        WHERE ime = ? AND priimek = ? AND datum_rojstva = ?
+        ''', (data['ime'], data['priimek'], data['datum_rojstva']))
+        
+        if self.cursor.fetchone() is None:
+            # Vstavi novega člana
+            self.cursor.execute('''
+            INSERT INTO clani (
+                ime, priimek, datum_rojstva, email, telefon, naslov, 
+                posta, postna_stevilka, fakulteta, studijski_program, 
+                letnik, datum_vclanitve, status, potrdilo_url, processed_date
+            ) VALUES (
+                :ime, :priimek, :datum_rojstva, :email, :telefon, :naslov,
+                :posta, :postna_stevilka, :fakulteta, :studijski_program,
+                :letnik, :datum_vclanitve, :status, :potrdilo_url, :processed_date
+            )
+            ''', data)
+            self.conn.commit()
+            return True
+        return False
+    """
+    def process_emails(self):
+        try:
+            self.connect_to_email()
+            
+            # Pridobi število sporočil
+            num_messages = len(self.pop.list()[1])
+            print(f"Število sporočil za procesiranje: {num_messages}")
+            
+            for i in range(num_messages):
+                msg_num = i + 1
+                try:
+                    print(f"Procesiranje sporočila {msg_num}/{num_messages}")
+                    
+                    # Pridobi sporočilo
+                    lines = self.pop.retr(msg_num)[1]
+                    msg_content = b'\n'.join(lines).decode('utf-8', errors='ignore')
+                    email_message = email.message_from_string(msg_content)
+                    
+                    # Preveri zadevo
+                    subject = ''
+                    if email_message['subject']:
+                        subject = decode_header(email_message['subject'])[0][0]
+                        if isinstance(subject, bytes):
+                            subject = subject.decode()
+                    
+                    if "Novi član" in subject:
+                        print(f"Najdeno sporočilo novega člana")
+                        
+                        # Pridobi HTML vsebino
+                        html_content = None
+                        for part in email_message.walk():
+                            if part.get_content_type() == "text/html":
+                                html_content = part.get_payload(decode=True).decode()
+                                break
+                        
+                        if html_content:
+                            data = self.extract_data_from_html(html_content)
+                            self.save_to_database(data)
+                
+                except Exception as e:
+                    print(f"Napaka pri procesiranju sporočila {msg_num}: {str(e)}")
+                    continue
+                
+        except Exception as e:
+            print(f"Napaka pri procesiranju emailov: {str(e)}")
+        finally:
+            try:
+                if hasattr(self, 'pop'):
+                    self.pop.quit()
+            except:
+                pass
+
+    def close(self):
+        if self.conn:
+            self.conn.close()
+
+if __name__ == "__main__":
+    EMAIL_USER = "middleearth159@gmail.com"
+    EMAIL_PASS = "uhqr jret gzhq gihf"
+    
+    try:
+        processor = EmailProcessor(EMAIL_USER, EMAIL_PASS)
+        processor.process_emails()
+    except Exception as e:
+        print(f"Glavna napaka: {str(e)}")
+    finally:
+        processor.close()

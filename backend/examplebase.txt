@@ -1,0 +1,53 @@
+import pandas as pd 
+from sqlalchemy import create_engine
+import mysql.connector
+
+try:
+    mydb = mysql.connector.connect(
+    host="10.10.5.27",
+    user="root",
+    password="tarcinakubik",
+    database="nagios",
+    ssl_disabled=True
+    )
+except mysql.connector.Error as err:
+    print("An error occurred:", err)
+
+
+
+hostname= "10.10.5.27"
+database= "nagios"	
+username= "root"
+password= "tarcinakubik"
+
+engine = create_engine("mysql+pymysql://{user}:{pw}@{host}/{db}".format(host=hostname, db=database, user=username, pw=password))
+
+
+
+def insert_ping_status(ping_status):
+    mycursor = mydb.cursor()
+    
+    columns = [f'`{i}`' for i in range(1, len(ping_status) + 1)]
+    columns.append('cas')
+    
+    placeholders = ['%s'] * len(ping_status) + ['CURRENT_TIMESTAMP']
+    
+    sql = f"INSERT INTO ping_status ({', '.join(columns)}) VALUES ({', '.join(placeholders)})"
+    
+    mycursor.execute(sql, ping_status)
+    mydb.commit()
+    print(mycursor.rowcount, "record(s) affected")
+
+def insert_lite_status(lite_status):
+    grouped = lite_status.groupby('address')
+    for ip, group in grouped:
+        table_name = f'lite_{ip.replace(".", "_")}'
+        group.to_sql(table_name, con=engine, if_exists='append', index=False)
+        print(f"Records inserted successfully for IP: {ip}")
+
+def insert_full_status(lite_status):
+    grouped = lite_status.groupby('address')
+    for ip, group in grouped:
+        table_name = f'full_{ip.replace(".", "_")}'
+        group.to_sql(table_name, con=engine, if_exists='append', index=False)
+        print(f"Records inserted successfully for IP: {ip}")

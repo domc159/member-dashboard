@@ -1,0 +1,16 @@
+fastapi
+uvicorn
+sqlalchemy
+pymysql
+pandas
+python-multipart
+reportlab
+beautifulsoup4
+requests
+python-dotenv
+plotly
+email-validator 
+openpyxl
+PyPDF2
+	
+    

@@ -1,0 +1,244 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Osnovne nastavitve */
+:root {
+  --min-width: 1920px;
+  --padding: 20px;
+  --background: #252729;
+  --foreground: #d1995c;
+}
+
+html {
+  min-width: var(--min-width);
+  overflow-x: auto;
+}
+
+body {
+  min-width: var(--min-width);
+  margin: 0;
+  padding: 0;
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Glavni container */
+.container {
+  width: 100%;
+  min-width: var(--min-width);
+  padding-left: var(--padding);
+  padding-right: var(--padding);
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+/* Za širše ekrane (ultrawide) */
+@media (min-width: 1921px) {
+  .container {
+    max-width: var(--min-width);
+  }
+}
+
+h1 {
+  font-size: 24px;
+  color: var(--foreground);
+}
+
+h2 {
+  font-size: 18px;
+  color: var(--foreground);
+}
+
+h3 {
+  font-size: 12px;
+  color: var(--foreground);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  border: 1px solid #E4D7CA;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #414344;
+}
+
+tr:nth-child(even) {
+  background-color: #252729;
+}
+
+tr:hover {
+  background-color: #65584A;
+}
+
+input {
+  background-color: #65584A;
+  color: #252729;
+  border: 1px solid #E4D7CA;
+  padding: 8px;
+  border-radius: 4px;
+}
+
+input::placeholder {
+  color: rgba(228, 215, 202, 0.4);
+}
+
+a {
+  background-color: #d1995c;
+  color: #252729;
+  border: 1px solid #E4D7CA;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+
+button, .button-link {
+  background-color: #d1995c;
+  color: #252729;
+  border: 1px solid #E4D7CA;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+
+button:hover, .button-link:hover {
+  background-color: #b17a4a;
+}
+
+/* Dodamo nov razred za označevanje vrstic */
+.highlight-mismatch {
+  background-color: #90ac5e46 !important;
+}
+
+select {
+  background-color: #d1995c;
+  color: #252729;
+  border: 1px solid #E4D7CA;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+
+.icon-link {
+  background: none !important;
+  border: none !important;
+  padding: 0 !important;
+}
+
+.icon-link:hover {
+  background: none !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #252729;
+    --foreground: #d1995c;
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    h1 {
+      font-size: 24px;
+      color: var(--foreground);
+    }
+    
+    h2 {
+      font-size: 18px;
+      color: var(--foreground);
+    }
+    
+    h3 {
+      font-size: 12px;
+      color: var(--foreground);
+    }
+    
+    th, td {
+      border: 1px solid #E4D7CA;
+      padding: 8px;
+      text-align: left;
+    }
+    
+    th {
+      background-color: #414344;
+    }
+    
+    tr:nth-child(even) {
+      background-color: #252729;
+    }
+    
+    tr:hover {
+      background-color: #65584A;
+    }
+    input {
+      background-color: #65584A;
+      color: #252729;
+      border: 1px solid #E4D7CA;
+      padding: 8px;
+      border-radius: 4px;
+    }
+    
+    input::placeholder {
+      color: rgba(228, 215, 202, 0.4);
+    }
+
+    a {
+      background-color: #d1995c;
+      color: #252729;
+      border: 1px solid #E4D7CA;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      text-align: center;
+    }
+
+    button, .button-link {
+      background-color: #d1995c;
+      color: #252729;
+      border: 1px solid #E4D7CA;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      text-align: center;
+    }
+
+    button:hover, .button-link:hover {
+      background-color: #b17a4a;
+    }
+  }
+  .highlight-mismatch {
+    background-color: #90ac5e46 !important;
+  }
+  select {
+    background-color: #d1995c;
+    color: #252729;
+    border: 1px solid #E4D7CA;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+  }
+}

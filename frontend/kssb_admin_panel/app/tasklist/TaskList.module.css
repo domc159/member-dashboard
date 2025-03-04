@@ -1,0 +1,537 @@
+.homeButton, .refreshButton, .newTableButton {
+  background-color: #d1995c;
+  color: #252729;
+  border: 1px solid #E4D7CA;
+  border-radius: 1px;
+  cursor: pointer;
+}
+
+.homeButton {
+  width: 110px;
+}
+
+.newTableButton {
+  background-color: #d1995c;
+  color: #252729;
+  border: 1px solid #E4D7CA;
+  border-radius: 1px;
+  cursor: pointer;
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 1;
+  padding: 4px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.newTableButton, .addButton, .saveButton {
+  background-color: #d1995c;
+  color: #252729;
+  border: 1px solid #E4D7CA;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  
+}
+
+.homeButton:hover, .refreshButton:hover, .newTableButton:hover, .addButton:hover, .saveButton:hover {
+  background-color: #b17a4a;
+}
+
+.dateInput {
+  background-color: #65584A;
+  color: #252729;
+  border: 1px solid #E4D7CA;
+  padding: 8px;
+  border-radius: 4px;
+}
+
+.tablesContainer {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.tablesGrid {
+  column-count: 2;
+  column-gap: 20px;
+  width: 100%;
+}
+
+.table {
+  break-inside: avoid;
+  margin-bottom: 20px;
+  display: inline-block;
+  width: 100%;
+  background: var(--background);
+  border: 1px solid #E4D7CA;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+}
+
+.taskContainer {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  gap: 10px;
+  align-items: start;
+  margin-bottom: 10px;
+  padding: 5px;
+  position: relative;
+}
+
+.checkboxContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+}
+
+.checkbox {
+  accent-color: var(--foreground);
+  width: 24px;
+  height: 24px;
+  margin: 0;
+  cursor: pointer;
+}
+
+.charCounter {
+  position: absolute;
+  bottom: 5px;
+  right: 10px;
+  font-size: 12px;
+  color: #E4D7CA;
+  background-color: rgba(37, 39, 41, 0.8);
+  padding: 2px 6px;
+  border-radius: 4px;
+  pointer-events: none;
+}
+
+.taskInput, .completedTask {
+  width: 100%;
+  min-height: 44px;
+  padding: 12px;
+  padding-right: 70px;
+  border: 1px solid #E4D7CA;
+  border-radius: 4px;
+  resize: none;
+  overflow-y: hidden;
+  line-height: 1.5;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  font-size: 16px;
+}
+
+.taskInput {
+  background-color: #65584A;
+  color: #E4D7CA;
+}
+
+.completedTask {
+  text-decoration: line-through;
+  color: var(--background);
+  background-color: var(--foreground);
+}
+
+.buttonRow {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  gap: 10px;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.buttonContainer {
+  grid-column: 2;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.dateHeader {
+  font-size: 18px;
+  font-weight: bold;
+  padding: 10px;
+  background-color: #414344;
+  color: var(--foreground);
+  border-radius: 4px;
+}
+
+.dateHeaderContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.completedDate {
+  background-color: #90ac5e46;
+}
+
+.completedDateBadge {
+  background-color: #65584A;
+  color: #E4D7CA;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 14px;
+  margin-left: auto;
+}
+
+.refreshButton:disabled {
+  background-color: #666;
+  cursor: not-allowed;
+}
+
+.loading {
+  opacity: 0.8;
+}
+
+.toggleContainer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+}
+
+.toggleSwitch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+}
+
+.toggleSwitch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggleSlider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #65584A;
+  transition: .4s;
+  border-radius: 24px;
+  border: 1px solid #E4D7CA;
+}
+
+.toggleSlider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 4px;
+  bottom: 3px;
+  background-color: #E4D7CA;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+.toggleSwitch input:checked + .toggleSlider {
+  background-color: var(--foreground);
+}
+
+.toggleSwitch input:checked + .toggleSlider:before {
+  transform: translateX(26px);
+}
+
+.toggleLabel {
+  font-size: 14px;
+  color: #E4D7CA;
+  white-space: nowrap;
+}
+
+.notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 12px 24px;
+  border-radius: 4px;
+  color: var(--background);
+  font-weight: 500;
+  border: 1px solid #E4D7CA;
+  z-index: 1000;
+}
+
+.success {
+  background-color: #90ac5e;
+  border-color: #90ac5e;
+  color: white;
+}
+
+.error {
+  background-color: #8B0000;
+  border-color: #8B0000;
+  color: white;
+}
+
+@keyframes loading-spinner {
+  from {
+    transform: rotate(0turn);
+  }
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+.saveButton {
+  padding: 4px 12px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.saveButton:hover {
+  background-color: #45a049;
+}
+
+/* Mobile layout */
+@media screen and (max-width: 768px) {
+  .headerButtons {
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    gap: 15px;
+    width: 100%;
+  }
+
+  .homeButton {
+    width: 50% !important;
+    padding: 12px;
+    font-size: 16px;
+    margin: 0 auto;
+    display: block;
+  }
+
+  .buttonGroup {
+    display: flex;
+    flex-direction: row !important;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .refreshButton, .newTableButton {
+    width: 45% !important;
+    padding: 12px;
+    font-size: 16px;
+    margin: 0;
+  }
+
+  .toggleContainer {
+    width: 100%;
+    justify-content: center;
+    margin: 10px 0;
+    display: flex;
+  }
+
+  .dateInputContainer {
+    width: 90%;
+    display: flex;
+    flex-direction: row !important;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .dateInput {
+    width: 40% !important;
+    padding: 12px;
+    font-size: 14px;
+  }
+
+  .dateArrow {
+    margin: 0;
+    font-size: 14px;
+  }
+
+  .tablesGrid {
+    column-count: 1;
+  }
+
+  .table {
+    margin: 10px 0;
+    padding: 10px;
+  }
+}
+
+.headerButtons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.dateInputContainer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.dateArrow {
+  color: #E4D7CA;
+  font-weight: bold;
+}
+
+.dateInput {
+  background-color: #65584A;
+  color: #E4D7CA;
+  border: 1px solid #E4D7CA;
+  padding: 8px;
+  border-radius: 4px;
+  width: 130px;
+}
+
+/* Mobile layout */
+@media screen and (max-width: 768px) {
+  .headerButtons {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 10px;
+  }
+
+  .dateInputContainer {
+    flex-direction: row;
+    width: 100%;
+  }
+
+  .dateInput {
+    width: 40% !important;
+  }
+
+  .dateArrow {
+    margin: 0;
+    font-size: 14px;
+  }
+}
+
+.buttonGroup {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.toggleContainer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+}
+
+/* Mobile layout */
+@media screen and (max-width: 768px) {
+  .buttonGroup {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .buttonGroup button {
+    width: 100%;
+  }
+
+  .toggleContainer {
+    justify-content: center;
+    margin: 10px 0;
+  }
+}
+
+/* Mobile-specific styles */
+@media screen and (max-width: 768px) {
+  .tablesContainer {
+    padding: 10px;
+  }
+
+  .table {
+    margin: 10px 0;
+    padding: 10px;
+  }
+
+  .headerButtons {
+    flex-direction: column;
+    padding: 10px;
+    gap: 15px;
+  }
+
+  .buttonGroup {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .homeButton {
+    width: 100%;
+  }
+
+  .dateInputContainer {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .dateInput {
+    flex: 1;
+    min-height: 44px;
+    font-size: 16px;
+  }
+
+  .toggleContainer {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .toggleSwitch {
+    width: 60px;
+    height: 34px;
+  }
+
+  .toggleSlider:before {
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 3px;
+  }
+
+  .toggleSwitch input:checked + .toggleSlider:before {
+    transform: translateX(26px);
+  }
+
+  .toggleLabel {
+    font-size: 16px;
+  }
+
+  .notification {
+    width: 90%;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 10px;
+    font-size: 16px;
+    text-align: center;
+  }
+
+  .charCounter {
+    font-size: 14px;
+    padding: 4px 8px;
+  }
+}
+
+/* Ensure footer stays at bottom but doesn't overlap content */
+.footer {
+  position: relative;
+  margin-top: 40px;
+  padding: 20px;
+  width: 100%;
+  text-align: center;
+} 
